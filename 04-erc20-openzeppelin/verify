@@ -1,0 +1,1 @@
+npx hardhat verify --network arbsep 0xfefF669E247aE8d7Cff8B06FBcC595386C3350F5 "100000000000000000000"

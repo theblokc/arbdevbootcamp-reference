@@ -3,7 +3,7 @@ const { ethers } = require("hardhat");
 async function main() {
   const [deployer] = await ethers.getSigners();
 
-  const initialSupply = ethers.parseEther('1');
+  const initialSupply = ethers.parseUnits("1000", 18);
   const myTokenContract = await await hre.ethers.deployContract("MyToken", [initialSupply, deployer.address]);
 
   await myTokenContract.waitForDeployment();

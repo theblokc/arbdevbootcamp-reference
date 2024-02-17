@@ -10,7 +10,7 @@ async function main() {
   await myTokenContract.connect(owner).mint(owner.address, ethAmount);
 
   const ethAmountStake = ethers.parseUnits("10", 18);
-  await myTokenContract.stake(owner.address, ethAmountStake);
+  await myTokenContract.connect(owner).stake(ethAmountStake);
 
   const initialBalance = await myTokenContract.balanceOf(owner.address);
   console.log("Address initial balance before withdraw:", initialBalance.toString());

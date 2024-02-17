@@ -17,13 +17,13 @@ contract MyToken is ERC20, Ownable {
     _mint(account, amount);
   }
 
-  function stake(address account, uint256 amount) public {
+  function stake(uint256 amount) public {
     require(amount > 0, "Cannot stake 0 tokens");
     require(balanceOf(msg.sender) >= amount, "Insufficient balance");
 
     _stakes[msg.sender] += amount;
     _lastStakeTimestamp[msg.sender] = block.timestamp;
-    _transfer(account, address(this), amount);
+    _transfer(msg.sender, address(this), amount);
   }
 
   function withdraw() public {

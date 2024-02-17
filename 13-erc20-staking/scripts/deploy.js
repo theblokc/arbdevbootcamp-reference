@@ -3,10 +3,12 @@ const { ethers } = require("hardhat");
 async function main() {
   const [deployer] = await ethers.getSigners();
 
-  const initialSupply = '100000000000000000000';
+  const initialSupply = ethers.parseEther('1');
   const myTokenContract = await await hre.ethers.deployContract("MyToken", [initialSupply, deployer.address]);
 
   await myTokenContract.waitForDeployment();
+  const balance = await myTokenContract.balanceOf(deployer.address);
+  console.log(`Balance of ${deployer.address}: ${balance.toString()} tokens`);
   console.log(`Contract deployed to ${myTokenContract.target}`);
 }
 

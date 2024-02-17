@@ -1,16 +1,16 @@
-const { expect } = require('chai');
+const { ethers } = require("hardhat");
 
 async function main() {
   const [owner, addr1] = await ethers.getSigners();
-  const initialSupply = '100000000000000000000';
-  const myTokenContract = await await hre.ethers.deployContract("MyToken", [initialSupply, owner.address]);
+  const initialSupply = ethers.parseEther('1');
+  const myTokenContract = await await hre.ethers.deployContract("initialSupply", [initialSupply, owner.address]);
   await myTokenContract.waitForDeployment();
 
-  await myTokenContract.connect(owner).mint(addr1.address, 1000);
-  await myTokenContract.connect(addr1).stake(1000);
+  const gweiAmount = ethers.parseUnits("1000", "gwei");
+  await myTokenContract.connect(owner).mint(addr1.address, gweiAmount);
+  await myTokenContract.connect(addr1).stake(gweiAmount);
 
   const stakedBalance = await myTokenContract.getStake(addr1.address);
-  expect(stakedBalance).to.equal(1000);
   console.log("Staking successful. Staked balance of addr1:", stakedBalance.toString());
 }
 

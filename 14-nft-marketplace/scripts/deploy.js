@@ -1,10 +1,11 @@
 async function main() {
-  const myNftContract = await hre.ethers.deployContract("NftMarketplace");
-  await myNftContract.waitForDeployment();
-  console.log(`Contract deployed to ${myNftContract.target}`);
+  const myNFTContract = await await hre.ethers.deployContract("NftMarketplace");
+  await myNFTContract.waitForDeployment();
+  console.log(`Contract deployed to ${myNFTContract.target}`);
 }
 
-main().then(() => process.exit(0).catch(err => {
-  console.log(err);
+main().then(() => process.exit(0)).catch(error => {
+  console.error(error);
   process.exit(1);
-}))
+});
+
